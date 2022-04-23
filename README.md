@@ -24,3 +24,8 @@ I made REST API and GraphQL for CRUD API
 
 - For GraphQL Playground can be access on "/graphql-playground"
    - GraphQL Schema can be seen in "graphql" folder
+
+
+# Database
+
+- SQL Query to display data, can be seen in the "DB" folder with the file name "Database-Test-Query-Select.sql"
