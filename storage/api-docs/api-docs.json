@@ -1,0 +1,603 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Antikode Testing API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/brand": {
+            "get": {
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "GET a list of brands",
+                "description": "Returns a list of brands",
+                "operationId": "brand",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "Create a new brand",
+                "description": "Create a new brand",
+                "operationId": "brand post",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Brand name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    
+                    "request": "logo",
+                    "description": "Images",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "logo" : {
+                                        "type" : "string",
+                                        "format": "binary"
+                                    },
+                                    "banner" : {
+                                        "type" : "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/brand/{id}": {
+            "get": {
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "Find Brand by Id",
+                "description": "Returns a list of brands",
+                "operationId": "find brand",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Brand id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "Update Brand",
+                "description": "Returns a updated brand",
+                "operationId": "update brand",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Brand id",
+                        "required": true
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Brand name",
+                        "required": false
+                    },
+                    {
+                        "name": "_method",
+                        "in": "query",
+                        "description": "fill with PUT",
+                        "defaultValue" : "PUT",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    
+                    "request": "images",
+                    "description": "Images",
+                    "required": false,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "logo" : {
+                                        "type" : "string",
+                                        "format": "binary"
+                                    },
+                                    "banner" : {
+                                        "type" : "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            },
+            "delete" : {
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "Delete Brand",
+                "description": "Returns a deleted brand",
+                "operationId": "delete brand",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Brand id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/outlet": {
+            "get": {
+                "tags": [
+                    "Outlet"
+                ],
+                "summary": "GET a list of outlet",
+                "description": "Returns a list of outlet",
+                "operationId": "outlet",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Outlet"
+                ],
+                "summary": "Create a new Outlet",
+                "description": "Create a new Outlet",
+                "operationId": "Outlet post",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Outlet name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "brand_id",
+                        "in": "query",
+                        "description": "Brand id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "Outlet address",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "Outlet latitude address minimum -90, maximum 90",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": -90,
+                            "maximum": 90
+                        }
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "Outlet longitude address minimum -180, maximum 180",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": -180,
+                            "maximum": 180
+                        }
+                    }
+                ],
+                "requestBody": {
+                    
+                    "request": "picture",
+                    "description": "Images",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "picture" : {
+                                        "type" : "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/outlet/{id}": {
+            "get": {
+                "tags": [
+                    "Outlet"
+                ],
+                "summary": "Find Outlet by Id",
+                "description": "Returns a list of Outlets",
+                "operationId": "find Outlet",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Outlet id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Outlet"
+                ],
+                "summary": "Update Outlet",
+                "description": "Returns a updated Outlet",
+                "operationId": "update Outlet",
+                "parameters": [
+                    {
+                        "name": "_method",
+                        "in": "query",
+                        "description": "fill with PUT",
+                        "defaultValue" : "PUT",
+                        "required": true
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Outlet id",
+                        "required": true
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Outlet name",
+                        "required": false
+                    },
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "Outlet address",
+                        "required": false
+                    },
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "Outlet latitude address minimum -90, maximum 90",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": -90,
+                            "maximum": 90
+                        }
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "Outlet longitude address minimum -180, maximum 180",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": -180,
+                            "maximum": 180
+                        }
+                    }
+                ],
+                "requestBody": {
+                    
+                    "request": "picture",
+                    "description": "picture",
+                    "required": false,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "picture" : {
+                                        "type" : "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            },
+            "delete" : {
+                "tags": [
+                    "Outlet"
+                ],
+                "summary": "Delete Outlet",
+                "description": "Returns a deleted Outlet",
+                "operationId": "delete Outlet",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Outlet id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/product": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "GET a list of Products",
+                "description": "Returns a list of Products",
+                "operationId": "Product",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Create a new Product",
+                "description": "Create a new Product",
+                "operationId": "Product post",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Product name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "outlet_id",
+                        "in": "query",
+                        "description": "Outlet id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "brand_id",
+                        "in": "query",
+                        "description": "Brand id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "price",
+                        "in": "query",
+                        "description": "Product price minimum value 1",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum":1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    
+                    "request": "picture",
+                    "description": "Product Picture",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "picture" : {
+                                        "type" : "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/product/{id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Find Product by Id",
+                "description": "Returns a list of Products",
+                "operationId": "find Product",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Update Product",
+                "description": "Returns a updated Product",
+                "operationId": "update Product",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "brand_id",
+                        "in": "query",
+                        "description": "Brand id",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Product name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "price",
+                        "in": "query",
+                        "description": "Product price",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "_method",
+                        "in": "query",
+                        "description": "fill with PUT",
+                        "defaultValue" : "PUT",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    
+                    "request": "picture",
+                    "description": "picture",
+                    "required": false,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "picture" : {
+                                        "type" : "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            },
+            "delete" : {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Delete Product",
+                "description": "Returns a deleted Product",
+                "operationId": "delete Product",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        }
+
+    }
+}

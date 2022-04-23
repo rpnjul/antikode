@@ -1,0 +1,114 @@
+"Can be used as an argument to upload files using https://github.com/jaydenseric/graphql-multipart-request-spec"
+scalar Upload
+  @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Upload")
+
+type Query {
+    brands: [Brand!]! @all
+    brand(id: ID! @eq): Brand @find
+
+    outlets: [Outlet!]! @all
+    outlet(id: ID! @eq): Outlet! @find
+
+    products: [Product!]! @all
+    product(id: ID! @eq): Product! @find
+}
+
+type Mutation {
+    createBrand(
+        brand: InputBrand @spread
+    ): Brand @create
+    updateBrand(
+        id: ID!
+        brand: InputBrand @spread
+    ): Brand @update
+    deleteBrand(
+        id: ID!
+    ): Brand @delete
+
+    createOutlet(
+        outlet: InputOutlet @spread
+    ): Outlet @field(resolver: "App\\GraphQL\\Mutations\\OutletMutator@create")
+    updateOutlet(
+        id: ID!
+        outlet: InputOutlet @spread
+    ): Outlet @field(resolver: "App\\GraphQL\\Mutations\\OutletMutator@update")
+    deleteOutlet(
+        id: ID!
+    ): Outlet @delete
+
+    createProduct(
+        product: InputProduct @spread
+    ): Product @create
+    updateProduct(
+        id: ID!
+        product: InputProduct @spread
+    ): Product @update
+    deleteProduct(
+        id: ID!
+    ): Product @delete
+    
+    # uploadImage(image: Upload!): String
+}
+
+type Brand {
+    id: ID!
+    name: String!
+    logo: String
+    banner: String
+    outlets: [Outlet!] @hasMany
+    products: [Product!] @hasMany
+}
+
+input InputBrand {
+    name: String!
+}
+
+type Outlet {
+    id: ID!
+    name: String!
+    address: String!
+    position: Position! @method(name: "getDistance")
+    brand: Brand! @belongsTo
+    products: [Product!] @hasMany
+    picture: String
+}
+
+input InputOutlet {
+    brand_id: ID!
+    name: String!
+    address: String!
+    lat: Float
+    lng: Float
+}
+
+type Product {
+    id: ID!
+    outlet_id: Int!
+    name: String!
+    price: Int!
+    picture: String
+    brand: Brand! @belongsTo
+}
+
+input InputProduct {
+    brand_id: ID!
+    name: String!
+    price: Int!
+}
+
+type Position {
+    distance: String!
+}
+
+
+enum Category {
+    logo
+    banner
+    picture
+}
+
+enum Parameter {
+    brand
+    outlet
+    product
+}
